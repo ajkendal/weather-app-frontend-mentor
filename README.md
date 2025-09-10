@@ -11,7 +11,6 @@ This is a solution to the [Weather app challenge on Frontend Mentor](https://www
 - [My process](#my-process)
   - [Built with](#built-with)
   - [Mermaid Diagram](#mermaid-diagram)
-  - [API Flow Diagram](#api-flow-diagram)
   - [What I learned](#what-i-learned)
   - [Stretch Goals](#stretch-goals)
 - [Author](#author)
@@ -68,7 +67,7 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - [GitHub](https://github.com/)
 - [Google Fonts](https://fonts.google.com/)
 
-### Flowcharts
+### Mermaid Diagram
 
 ```mermaid
 flowchart TD
@@ -83,10 +82,6 @@ flowchart TD
     %% optional: show that user can update input repeatedly
     G -. user changes location .-> E
 ```
-
-### 🔄 API Flow Diagram
-
-![API Flow Diagram](./public/images/readme/api_flow_polished_1600w.png)
 
 ### What I learned
 
