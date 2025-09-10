@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+:root {
+  /* Colors */
+  --clr-neutral-900: 243, 96%, 9%;
+  --clr-neutral-800: 243, 27%, 20%;
+  --clr-neutral-700: 243, 23%, 24%;
+  --clr-neutral-600: 243, 23%, 30%;
+  --clr-neutral-300: 240, 6%, 70%;
+  --clr-neutral-200: 250, 6%, 84%;
+  --clr-neutral-0: 0, 0%, 100%;
+  --clr-orange: 28, 100%, 52%;
+  --clr-blue-500: 233, 67%, 56%;
+  --clr-blue-700: 248, 70%, 36%;
+
+  --ff-dm-sans: 'DM Sans', sans-serif;
+  --ff-bricolage-grotesque: 'Bricolage Grotesque', sans-serif;
+}
+
+/* ------------------- */
+/* Reset               */
+/* ------------------- */
+
+/* https://piccalil.li/blog/a-modern-css-reset/ */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  margin: 0;
+  font-family: var(--ff-dm-sans);
+  background-color: hsl(var(--clr-neutral-900));
+  color: hsl(var(--clr-neutral-0));
+}
+
+/* Set shorter line heights on headings and interactive elements */
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+/* ------------------- */
+/* Text styles         */
+/* ------------------- */
+
+.text-preset-1 {
+  font-family: var(--ff-dm-sans);
+  font-size: 6rem;
+  line-height: 100%;
+  letter-spacing: -2px;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.text-preset-2 {
+  font-family: var(--ff-bricolage-grotesque);
+  font-size: 3.25rem;
+  line-height: 120%;
+  letter-spacing: 0;
+  font-weight: 700;
+}
+
+.text-preset-3 {
+  font-family: var(--ff-dm-sans);
+  font-size: 2rem;
+  line-height: 100%;
+  letter-spacing: 0;
+  font-weight: 300;
+}
+
+.text-preset-4 {
+  font-family: var(--ff-dm-sans);
+  font-size: 1.75rem;
+  line-height: 120%;
+  letter-spacing: 0;
+  font-weight: 700;
+}
+
+.text-preset-5 {
+  font-family: var(--ff-dm-sans);
+  font-size: 1.25rem;
+  line-height: 120%;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+.text-preset-5-medium {
+  @extend .text-preset-5;
+  font-weight: 500;
+}
+
+.text-preset-6 {
+  @extend .text-preset-5-medium;
+  font-size: 1.125rem;
+}
+
+.text-preset-7 {
+  @extend .text-preset-5-medium;
+  font-size: 1rem;
+}
+
+.text-preset-8 {
+  @extend .text-preset-5-medium;
+  font-size: 0.875rem;
+}
+
+/* ------------------- */
+/* Border Radius       */
+/* ------------------- */
+
+.radius-0 {
+  border-radius: 0;
+}
+
+.radius-4 {
+  border-radius: 4px;
+}
+
+.radius-6 {
+  border-radius: 6px;
+}
+
+.radius-8 {
+  border-radius: 8px;
+}
+
+.radius-10 {
+  border-radius: 10px;
+}
+
+.radius-12 {
+  border-radius: 12px;
+}
+
+.radius-16 {
+  border-radius: 16px;
+}
+
+.radius-20 {
+  border-radius: 20px;
+}
+
+.radius-24 {
+  border-radius: 24px;
+}
+
+.radius-full {
+  border-radius: 999px;
+}
+
+.btn-search {
+  @extend .text-preset-5-medium;
+  @extend .radius-12;
+  color: hsl(var(--clr-neutral-0));
+  background-color: hsl(var(--clr-blue-500));
+  padding: 1rem 1.5rem;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  x &:hover {
+    background-color: hsl(var(--clr-blue-700));
+  }
+  &:focus {
+    outline: 2px solid hsl(var(--clr-blue-500));
+    outline-offset: 2px;
+  }
+}
+
+.input-field {
+  @extend .text-preset-5-medium;
+  @extend .radius-12;
+  background-color: hsl(var(--clr-neutral-800));
+  border: none;
+  padding: 1rem 1.5rem 1rem 4rem;
+  color: hsl(var(--clr-neutral-0));
+
+  background-image: url('/images/icons/icon-search.svg');
+  background-size: 1.25rem;
+  background-repeat: no-repeat;
+  background-position: left 1.5rem center;
+  &:hover {
+    background-color: hsl(var(--clr-neutral-700));
+  }
+  &:focus {
+    outline: 2px solid hsl(var(--clr-neutral-0));
+    background-color: hsl(var(--clr-neutral-800));
+    outline-offset: 2px;
+  }
+}
+
+.button {
+  @extend .text-preset-7;
+  @extend .radius-8;
+  background-color: hsl(var(--clr-neutral-800));
+  border: none;
+  padding: 0.75rem 1rem;
+  color: hsl(var(--clr-neutral-0));
+  cursor: pointer;
+  text-align: left;
+  &:hover {
+    background-color: hsl(var(--clr-neutral-700));
+  }
+  &:focus {
+    outline: 2px solid hsl(var(--clr-neutral-0));
+    background-color: hsl(var(--clr-neutral-800));
+    outline-offset: 2px;
+  }
+}
+
+.dropdown-button {
+  @extend .button;
+  padding: 0.75rem 3.5rem 0.75rem 1rem;
+  background-image: url('/images/icons/icon-dropdown.svg');
+  background-size: 1.125rem;
+  background-repeat: no-repeat;
+  background-position: right 1.5rem center;
+}
+
+.units-button {
+  @extend .dropdown-button;
+  background-image: url('/images/icons/icon-dropdown.svg'),
+    url('/images/icons/icon-units.svg');
+  background-size: 1.125rem, 1.125rem;
+  background-repeat: no-repeat, no-repeat;
+  background-position: right 1.5rem center, left 1.5rem center;
+  padding: 0.75rem 3.5rem;
+}
