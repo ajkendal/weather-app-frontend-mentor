@@ -22,9 +22,10 @@ const getWeather = async (
       'is_day',
       'wind_speed_10m',
       'weather_code',
+      'precipitation',
     ],
     timezone: 'auto',
-    temprerature_unit: units.temperature,
+    temperature_unit: units.temperature,
     wind_speed_unit: units.wind_speed,
     precipitation_unit: units.precipitation,
   }
@@ -47,6 +48,7 @@ const getWeather = async (
         is_day: current.variables(3)!.value(),
         wind_speed_10m: current.variables(4)!.value(),
         weather_code: current.variables(5)!.value(),
+        precipitation: current.variables(6)!.value(),
       },
       hourly: {
         time: [
