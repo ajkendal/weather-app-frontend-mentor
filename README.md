@@ -68,7 +68,7 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - [GitHub](https://github.com/)
 - [Google Fonts](https://fonts.google.com/)
 
-### Flowcharts
+### Mermaid Diagram
 
 ```mermaid
 flowchart TD
@@ -84,7 +84,7 @@ flowchart TD
     G -. user changes location .-> E
 ```
 
-### 🔄 API Flow Diagram
+### API Flow Diagram
 
 ![API Flow Diagram](./public/images/readme/api_flow_polished_1600w.png)
 
