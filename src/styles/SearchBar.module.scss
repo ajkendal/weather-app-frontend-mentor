@@ -5,13 +5,18 @@
   gap: 1rem;
   justify-content: center;
   align-content: center;
-  margin-block: 2rem;
 
   input {
     max-width: 100%;
   }
 
-  @media (min-width: 35rem) {
+  @media (min-width: 30em) {
+    flex-direction: row;
+    input {
+      width: 100%;
+    }
+  }
+  @media (min-width: 55em) {
     flex-direction: row;
     input {
       width: 35rem;

@@ -231,11 +231,13 @@ textarea:not([rows]) {
 
 .container {
   max-width: 80rem;
+  width: 95%;
   margin-inline: auto;
   display: grid;
   place-items: center;
   padding-inline: 1rem;
   padding-bottom: 4rem;
+  row-gap: 1rem;
 }
 
 .btn-search {
@@ -327,6 +329,41 @@ textarea:not([rows]) {
   background-repeat: no-repeat, no-repeat;
   background-position: right 1.5rem center, left 1.5rem center;
   padding: 0.75rem 3.5rem;
+  &.open {
+    background-image: url('/images/icons/icon-dropdown-flipped.svg'),
+      url('/images/icons/icon-units.svg');
+  }
+}
+
+.dropdown-style {
+  @extend .radius-12;
+  @extend .text-preset-7;
+  color: hsl(var(--clr-neutral-0));
+  margin-top: 0.5rem;
+  border: 1px solid hsl(var(--clr-neutral-600));
+  padding: 0.5rem;
+  background-color: hsl(var(--clr-neutral-800));
+  width: 15rem;
+}
+
+.dropdown-description {
+  @extend .text-preset-8;
+  color: hsl(var(--clr-neutral-300));
+  padding: 0.375rem 0.5rem;
+}
+
+.dropdown-item {
+  @extend .text-preset-7;
+  @extend .radius-8;
+  color: hsl(var(--clr-neutral-0));
+  display: flex;
+  justify-content: space-between;
+  padding: 0.625rem 0.5rem;
+  border-radius: 8px;
+
+  &.active {
+    background-color: hsl(var(--clr-neutral-700));
+  }
 }
 
 /* Google Places Autocomplete styles */
@@ -336,7 +373,7 @@ textarea:not([rows]) {
   @extend .text-preset-7;
   color: hsl(var(--clr-neutral-0));
   background-color: hsl(var(--clr-neutral-800));
-  border: none;
+  border: 1px solid hsl(var(--clr-neutral-600));
   box-shadow: none;
   padding: 0.5rem;
   margin-top: 0.5rem;

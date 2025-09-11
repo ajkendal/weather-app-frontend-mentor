@@ -4,6 +4,7 @@ import { getWeather } from './utils/getWeather'
 import { formatHourly } from './utils/formatHourly'
 import { formatDaily } from './utils/formatDaily'
 import SearchBar from './components/SearchBar'
+import Header from './components/Header'
 
 function App() {
   const [coordinates, setCoordinates] = useState<{
@@ -62,9 +63,7 @@ function App() {
 
   return (
     <main className='container'>
-      <h1>Under Construction</h1>
-
-      <p>{searchCity}</p>
+      <Header isMetric={isMetric} setIsMetric={setIsMetric} />
       <SearchBar
         setCoordinates={setCoordinates}
         setSearchCity={setSearchCity}
