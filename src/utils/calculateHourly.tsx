@@ -16,29 +16,24 @@ const calculateHourlyWeather = (hourlyData: any) => {
     weather_code: number[]
   }
 
-  type Weekday =
-    | 'Monday'
-    | 'Tuesday'
-    | 'Wednesday'
-    | 'Thursday'
-    | 'Friday'
-    | 'Saturday'
-    | 'Sunday'
+  type Weekday = 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun'
 
   const updatedHourlyData: Record<Weekday, HourlyWeather> = {
-    Monday: { time: [], temperature_2m: [], weather_code: [] },
-    Tuesday: { time: [], temperature_2m: [], weather_code: [] },
-    Wednesday: { time: [], temperature_2m: [], weather_code: [] },
-    Thursday: { time: [], temperature_2m: [], weather_code: [] },
-    Friday: { time: [], temperature_2m: [], weather_code: [] },
-    Saturday: { time: [], temperature_2m: [], weather_code: [] },
-    Sunday: { time: [], temperature_2m: [], weather_code: [] },
+    Mon: { time: [], temperature_2m: [], weather_code: [] },
+    Tue: { time: [], temperature_2m: [], weather_code: [] },
+    Wed: { time: [], temperature_2m: [], weather_code: [] },
+    Thu: { time: [], temperature_2m: [], weather_code: [] },
+    Fri: { time: [], temperature_2m: [], weather_code: [] },
+    Sat: { time: [], temperature_2m: [], weather_code: [] },
+    Sun: { time: [], temperature_2m: [], weather_code: [] },
   }
 
   hourlyData.time.forEach((time: string, index: number) => {
     const date = new Date(time)
     const hour = date.toTimeString().slice(0, 5) // Extract HH:MM
-    const day = date.toLocaleDateString('en-US', { weekday: 'long' }) as Weekday
+    const day = date.toLocaleDateString('en-US', {
+      weekday: 'short',
+    }) as Weekday
 
     if (setHourMatch.includes(hour)) {
       updatedHourlyData[day].time.push(time)
