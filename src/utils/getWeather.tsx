@@ -3,7 +3,8 @@ import { fetchWeatherApi } from 'openmeteo'
 const getWeather = async (
   latitude: number,
   longitude: number,
-  isMetric: boolean
+  isMetric: boolean,
+  setIsError: (message: string) => void
 ) => {
   const units = isMetric
     ? { temperature: 'celsius', wind_speed: 'kmh', precipitation: 'mm' }
@@ -90,6 +91,9 @@ const getWeather = async (
 
     return weatherData
   } catch (error) {
+    setIsError(
+      "We couldn't connect to the server (API error). Please try again in a few moments."
+    )
     console.error('Error fetching weather data:', error)
     return { error: 'Failed to fetch weather data' }
   }

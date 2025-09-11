@@ -65,6 +65,8 @@ body {
   font-family: var(--ff-dm-sans);
   background-color: hsl(var(--clr-neutral-900));
   color: hsl(var(--clr-neutral-0));
+  display: grid;
+  grid-template-rows: min-content 1fr;
 }
 
 /* Set shorter line heights on headings and interactive elements */
@@ -223,6 +225,19 @@ textarea:not([rows]) {
   border-radius: 999px;
 }
 
+/* ----------------------------- */
+/* Layout                        */
+/* ----------------------------- */
+
+.container {
+  max-width: 80rem;
+  margin-inline: auto;
+  display: grid;
+  place-items: center;
+  padding-inline: 1rem;
+  padding-bottom: 4rem;
+}
+
 .btn-search {
   @extend .text-preset-5-medium;
   @extend .radius-12;
@@ -232,12 +247,17 @@ textarea:not([rows]) {
   text-align: center;
   border: none;
   cursor: pointer;
-  x &:hover {
+  &:hover {
     background-color: hsl(var(--clr-blue-700));
   }
   &:focus {
     outline: 2px solid hsl(var(--clr-blue-500));
     outline-offset: 2px;
+  }
+  &:disabled {
+    background-color: hsl(var(--clr-neutral-700));
+    color: hsl(var(--clr-neutral-300));
+    cursor: not-allowed;
   }
 }
 
@@ -260,6 +280,14 @@ textarea:not([rows]) {
     outline: 2px solid hsl(var(--clr-neutral-0));
     background-color: hsl(var(--clr-neutral-800));
     outline-offset: 2px;
+  }
+  &.error {
+    outline: 2px solid hsl(var(--clr-orange));
+    background-color: hsl(var(--clr-neutral-800));
+    outline-offset: 2px;
+    &::placeholder {
+      color: hsl(var(--clr-orange), 0.5);
+    }
   }
 }
 
@@ -299,4 +327,43 @@ textarea:not([rows]) {
   background-repeat: no-repeat, no-repeat;
   background-position: right 1.5rem center, left 1.5rem center;
   padding: 0.75rem 3.5rem;
+}
+
+/* Google Places Autocomplete styles */
+/* Override default styles */
+.pac-container {
+  @extend .radius-12;
+  @extend .text-preset-7;
+  color: hsl(var(--clr-neutral-0));
+  background-color: hsl(var(--clr-neutral-800));
+  border: none;
+  box-shadow: none;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.pac-item {
+  @extend .text-preset-7;
+  @extend .radius-8;
+  padding: 0.625rem 0.5rem;
+  background-color: hsl(var(--clr-neutral-800));
+  border: 1px solid hsl(var(--clr-neutral-800)) !important;
+  color: hsl(var(--clr-neutral-0));
+  cursor: pointer;
+  border: none;
+  box-shadow: none;
+
+  &:hover {
+    background-color: hsl(var(--clr-neutral-700));
+    border: 1px solid hsl(var(--clr-neutral-600));
+  }
+}
+
+.pac-item-query {
+  @extend .text-preset-7;
+  font-weight: 400;
+  color: hsl(var(--clr-neutral-0));
+}
+.pac-icon {
+  display: none;
 }

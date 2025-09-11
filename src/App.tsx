@@ -3,6 +3,7 @@ import { getWeather } from './utils/getWeather'
 
 import { formatHourly } from './utils/formatHourly'
 import { formatDaily } from './utils/formatDaily'
+import SearchBar from './components/SearchBar'
 
 function App() {
   const [coordinates, setCoordinates] = useState<{
@@ -10,6 +11,7 @@ function App() {
     longitude: number
   }>({ latitude: 0, longitude: 0 })
   const [isLoading, setIsLoading] = useState(false)
+  const [searchCity, setSearchCity] = useState('')
   const [isError, setIsError] = useState('')
   const [isMetric, setIsMetric] = useState(false)
   const [weatherData, setWeatherData] = useState({})
@@ -19,7 +21,8 @@ function App() {
     const data = await getWeather(
       coordinates.latitude,
       coordinates.longitude,
-      isMetric
+      isMetric,
+      setIsError
     )
     if ('hourly' in data) {
       const hourlyData = formatHourly(data.hourly)
@@ -31,7 +34,7 @@ function App() {
       })
     } else {
       setIsError(
-        'We couldn’t connect to the server (API error). Please try again in a few moments.'
+        'Error fetching weather data. Please try again in a few moments.'
       )
     }
     setIsLoading(false)
@@ -45,6 +48,7 @@ function App() {
           longitude: position.coords.longitude,
         })
       })
+      setSearchCity('Current Location')
     } else {
       setIsError('Geolocation is not supported by this browser.')
       console.error('Geolocation is not supported by this browser.')
@@ -53,19 +57,19 @@ function App() {
 
   useEffect(() => {
     fetchWeather()
+    console.log('Fetching weather data...', weatherData)
   }, [isMetric, coordinates])
 
   return (
-    <>
+    <main className='container'>
       <h1>Under Construction</h1>
-      {coordinates?.latitude && coordinates?.longitude ? (
-        <p>
-          Latitude: {coordinates.latitude}, Longitude: {coordinates.longitude}
-        </p>
-      ) : (
-        <p>Please provide your location.</p>
-      )}
-    </>
+
+      <p>{searchCity}</p>
+      <SearchBar
+        setCoordinates={setCoordinates}
+        setSearchCity={setSearchCity}
+      />
+    </main>
   )
 }
 
