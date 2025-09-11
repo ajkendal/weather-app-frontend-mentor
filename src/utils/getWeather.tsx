@@ -19,7 +19,6 @@ const getWeather = async (
       'temperature_2m',
       'relative_humidity_2m',
       'apparent_temperature',
-      'is_day',
       'wind_speed_10m',
       'weather_code',
       'precipitation',
@@ -33,35 +32,37 @@ const getWeather = async (
   try {
     const responses = await fetchWeatherApi(url, params)
     const response = responses[0]
-
-    const utcOffsetSeconds = response.utcOffsetSeconds()
     const current = response.current()!
     const hourly = response.hourly()!
     const daily = response.daily()!
 
+    const utcOffsetSeconds = new Date().getTimezoneOffset() * 60
+    const currentUtcOffsetSeconds = response.utcOffsetSeconds()
+
     const weatherData = {
       current: {
-        time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
+        time: new Date(
+          (Number(current.time()) + currentUtcOffsetSeconds) * 1000
+        ),
         temperature_2m: current.variables(0)!.value(),
         relative_humidity_2m: current.variables(1)!.value(),
         apparent_temperature: current.variables(2)!.value(),
-        is_day: current.variables(3)!.value(),
-        wind_speed_10m: current.variables(4)!.value(),
-        weather_code: current.variables(5)!.value(),
-        precipitation: current.variables(6)!.value(),
+        wind_speed_10m: current.variables(3)!.value(),
+        weather_code: current.variables(4)!.value(),
+        precipitation: current.variables(5)!.value(),
       },
       hourly: {
-        time: [
-          ...Array(
-            (Number(hourly.timeEnd()) - Number(hourly.time())) /
-              hourly.interval()
-          ),
-        ].map(
+        time: Array.from(
+          {
+            length:
+              (Number(hourly.timeEnd()) - Number(hourly.time())) /
+              hourly.interval(),
+          },
           (_, i) =>
             new Date(
               (Number(hourly.time()) +
-                i * hourly.interval() +
-                utcOffsetSeconds) *
+                utcOffsetSeconds +
+                i * hourly.interval()) *
                 1000
             )
         ),
@@ -69,14 +70,15 @@ const getWeather = async (
         weather_code: hourly.variables(1)!.valuesArray(),
       },
       daily: {
-        time: [
-          ...Array(
-            (Number(daily.timeEnd()) - Number(daily.time())) / daily.interval()
-          ),
-        ].map(
+        time: Array.from(
+          {
+            length:
+              (Number(daily.timeEnd()) - Number(daily.time())) /
+              daily.interval(),
+          },
           (_, i) =>
             new Date(
-              (Number(daily.time()) + i * daily.interval() + utcOffsetSeconds) *
+              (Number(daily.time()) + utcOffsetSeconds + i * daily.interval()) *
                 1000
             )
         ),

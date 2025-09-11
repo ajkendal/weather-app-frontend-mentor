@@ -34,10 +34,4 @@ const getWeatherIcon = (condition: number): string => {
   }
 }
 
-const getDay = (date: string): string => {
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-  const dayIndex = new Date(date).getDay()
-  return days[dayIndex]
-}
-
-export { getWeatherIcon, getDay }
+export { getWeatherIcon }

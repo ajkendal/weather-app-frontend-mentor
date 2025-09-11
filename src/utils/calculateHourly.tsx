@@ -30,7 +30,7 @@ const calculateHourlyWeather = (hourlyData: any) => {
 
   hourlyData.time.forEach((time: string, index: number) => {
     const date = new Date(time)
-    const hour = date.toTimeString().slice(0, 5) // Extract HH:MM
+    const hour = date.toTimeString().slice(0, 5)
     const day = date.toLocaleDateString('en-US', {
       weekday: 'short',
     }) as Weekday
