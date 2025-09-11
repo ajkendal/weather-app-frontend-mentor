@@ -231,7 +231,7 @@ textarea:not([rows]) {
 
 .container {
   max-width: 80rem;
-  width: 95%;
+  width: 100%;
   margin-inline: auto;
   display: grid;
   place-items: center;
@@ -333,6 +333,16 @@ textarea:not([rows]) {
     background-image: url('/images/icons/icon-dropdown-flipped.svg'),
       url('/images/icons/icon-units.svg');
   }
+}
+
+.error-button {
+  @extend .button;
+  background-color: hsl(var(--clr-neutral-800));
+  background-image: url('/images/icons/icon-reload.svg');
+  background-size: 1.125rem;
+  background-repeat: no-repeat;
+  background-position: left 1.5rem center;
+  padding: 0.75rem 1rem 0.75rem 3.5rem;
 }
 
 .dropdown-style {

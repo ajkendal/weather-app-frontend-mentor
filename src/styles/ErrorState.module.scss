@@ -1,0 +1,16 @@
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  height: 80vh;
+  text-align: center;
+  img {
+    width: 42px;
+    aspect-ratio: 1/1;
+  }
+  p {
+    color: hsl(var(--clr-neutral-200));
+  }
+}

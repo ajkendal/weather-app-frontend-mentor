@@ -5,6 +5,7 @@ import { formatHourly } from './utils/formatHourly'
 import { formatDaily } from './utils/formatDaily'
 import SearchBar from './components/SearchBar'
 import Header from './components/Header'
+import ErrorState from './components/ErrorState'
 
 function App() {
   const [coordinates, setCoordinates] = useState<{
@@ -58,16 +59,24 @@ function App() {
 
   useEffect(() => {
     fetchWeather()
+    console.log(isError)
     console.log('Fetching weather data...', weatherData)
   }, [isMetric, coordinates])
 
   return (
     <main className='container'>
-      <Header isMetric={isMetric} setIsMetric={setIsMetric} />
-      <SearchBar
-        setCoordinates={setCoordinates}
-        setSearchCity={setSearchCity}
-      />
+      <Header isMetric={isMetric} setIsMetric={setIsMetric} isError={isError} />
+
+      {isError ? (
+        <ErrorState message={isError} />
+      ) : (
+        <>
+          <SearchBar
+            setCoordinates={setCoordinates}
+            setSearchCity={setSearchCity}
+          />
+        </>
+      )}
     </main>
   )
 }
