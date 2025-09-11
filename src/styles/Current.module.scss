@@ -1,0 +1,24 @@
+.current-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 1rem;
+}
+
+.loading-indicator {
+  min-height: 19rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  img {
+    width: 5rem;
+    margin-inline: auto;
+  }
+  p {
+    text-align: center;
+    color: hsl(var(--clr-neutral-200));
+  }
+}

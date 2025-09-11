@@ -6,27 +6,36 @@ import { formatDaily } from './utils/formatDaily'
 import SearchBar from './components/SearchBar'
 import Header from './components/Header'
 import ErrorState from './components/ErrorState'
+import Current from './components/Current'
 
 function App() {
   const [coordinates, setCoordinates] = useState<{
     latitude: number
     longitude: number
   }>({ latitude: 0, longitude: 0 })
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [searchCity, setSearchCity] = useState('')
   const [isError, setIsError] = useState('')
   const [isMetric, setIsMetric] = useState(false)
-  const [weatherData, setWeatherData] = useState({})
+  const [weatherData, setWeatherData] = useState<{
+    current?: any
+    daily?: any
+    hourly?: any
+  }>({})
 
   const fetchWeather = async () => {
-    setIsLoading(true)
+    //setIsLoading(true)
     const data = await getWeather(
       coordinates.latitude,
       coordinates.longitude,
       isMetric,
       setIsError
     )
-    if ('hourly' in data) {
+
+    if ('error' in data) {
+      setIsError('Error fetching weather data.')
+      setWeatherData({})
+    } else {
       const hourlyData = formatHourly(data.hourly)
       const dailyData = formatDaily(data.daily)
       setWeatherData({
@@ -34,12 +43,9 @@ function App() {
         daily: dailyData,
         hourly: hourlyData,
       })
-    } else {
-      setIsError(
-        'Error fetching weather data. Please try again in a few moments.'
-      )
     }
-    setIsLoading(false)
+
+    //setIsLoading(false)
   }
 
   useEffect(() => {
@@ -59,8 +65,6 @@ function App() {
 
   useEffect(() => {
     fetchWeather()
-    console.log(isError)
-    console.log('Fetching weather data...', weatherData)
   }, [isMetric, coordinates])
 
   return (
@@ -75,6 +79,16 @@ function App() {
             setCoordinates={setCoordinates}
             setSearchCity={setSearchCity}
           />
+          <div className='flex-container'>
+            <div className='current-daily-section'>
+              <Current
+                searchCity={searchCity}
+                isLoading={isLoading}
+                currentData={weatherData.current}
+              />
+            </div>
+            <div className='hourly-section'></div>
+          </div>
         </>
       )}
     </main>
