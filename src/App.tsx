@@ -24,7 +24,7 @@ function App() {
   }>({})
 
   const fetchWeather = async () => {
-    //setIsLoading(true)
+    setIsLoading(true)
     const data = await getWeather(
       coordinates.latitude,
       coordinates.longitude,
@@ -44,8 +44,7 @@ function App() {
         hourly: hourlyData,
       })
     }
-
-    //setIsLoading(false)
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -65,6 +64,7 @@ function App() {
 
   useEffect(() => {
     fetchWeather()
+    console.log('weather data updated', weatherData)
   }, [isMetric, coordinates])
 
   return (
@@ -85,6 +85,7 @@ function App() {
                 searchCity={searchCity}
                 isLoading={isLoading}
                 currentData={weatherData.current}
+                isMetric={isMetric}
               />
             </div>
             <div className='hourly-section'></div>
