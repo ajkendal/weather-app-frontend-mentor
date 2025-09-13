@@ -31,8 +31,42 @@
   background-repeat: no-repeat;
   background-position: center;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  .current-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .current-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    img {
+      width: 120px;
+      height: auto;
+    }
+  }
+
   @media (min-width: 30em) {
     background-image: url('/images/backgrounds/bg-today-large.svg');
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .current-text {
+      align-items: flex-start;
+      text-align: left;
+    }
   }
 }
 
