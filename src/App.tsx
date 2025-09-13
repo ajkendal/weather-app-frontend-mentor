@@ -7,6 +7,7 @@ import SearchBar from './components/SearchBar'
 import Header from './components/Header'
 import ErrorState from './components/ErrorState'
 import Current from './components/Current'
+import Daily from './components/Daily'
 
 function App() {
   const [coordinates, setCoordinates] = useState<{
@@ -79,13 +80,20 @@ function App() {
             setCoordinates={setCoordinates}
             setSearchCity={setSearchCity}
           />
-          <div className='flex-container'>
+          <div className='flex-container current-daily-hourly'>
             <div className='current-daily-section'>
               <Current
                 searchCity={searchCity}
                 isLoading={isLoading}
                 currentData={weatherData.current}
                 isMetric={isMetric}
+              />
+              <Daily
+                currentDate={
+                  weatherData.current ? weatherData.current.time.getDay() : 0
+                }
+                dailyData={weatherData.daily}
+                isLoading={isLoading}
               />
             </div>
             <div className='hourly-section'></div>
