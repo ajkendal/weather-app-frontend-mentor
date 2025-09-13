@@ -4,11 +4,11 @@ import { useState } from 'react'
 type HeaderProps = {
   isMetric: boolean
   setIsMetric: (value: boolean) => void
+  isError: string
 }
 
-const Header = ({ isMetric, setIsMetric }: HeaderProps) => {
+const Header = ({ isMetric, setIsMetric, isError }: HeaderProps) => {
   const [showDropdown, setShowDropdown] = useState(false)
-  console.log(isMetric, setIsMetric)
 
   const dropdDown = () => {
     return (
@@ -78,7 +78,9 @@ const Header = ({ isMetric, setIsMetric }: HeaderProps) => {
         </button>
         {showDropdown && dropdDown()}
       </nav>
-      <h1 className='text-preset-2'>How's the sky looking today?</h1>
+      {!isError && (
+        <h1 className='text-preset-2'>How's the sky looking today?</h1>
+      )}
     </header>
   )
 }
