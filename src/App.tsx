@@ -23,6 +23,9 @@ function App() {
     daily?: any
     hourly?: any
   }>({})
+  const currentDateNumber = weatherData.current
+    ? weatherData.current.time.getDay()
+    : 0
 
   const fetchWeather = async () => {
     setIsLoading(true)
@@ -80,7 +83,7 @@ function App() {
             setCoordinates={setCoordinates}
             setSearchCity={setSearchCity}
           />
-          <div className='flex-container current-daily-hourly'>
+          <div className='flex-container'>
             <div className='current-daily-section'>
               <Current
                 searchCity={searchCity}
@@ -89,9 +92,7 @@ function App() {
                 isMetric={isMetric}
               />
               <Daily
-                currentDate={
-                  weatherData.current ? weatherData.current.time.getDay() : 0
-                }
+                currentDateNumber={currentDateNumber}
                 dailyData={weatherData.daily}
                 isLoading={isLoading}
               />
