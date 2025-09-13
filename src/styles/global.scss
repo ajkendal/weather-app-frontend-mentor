@@ -230,7 +230,7 @@ textarea:not([rows]) {
 /* ----------------------------- */
 
 .container {
-  max-width: 80rem;
+  max-width: 84.375rem;
   width: 100%;
   margin-inline: auto;
   padding-inline: 1rem;
@@ -273,10 +273,11 @@ textarea:not([rows]) {
 }
 
 .hourly-section {
-  outline: 2px solid green;
   width: 100%;
+  align-self: stretch;
+  max-height: 900px;
   @media (min-width: 55em) {
-    flex-shrink: 3;
+    flex-shrink: 2.25;
   }
 }
 

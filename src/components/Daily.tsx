@@ -14,7 +14,7 @@ interface DailyProps {
 
 const Daily = ({ currentDateNumber, dailyData, isLoading }: DailyProps) => {
   const blank = 7
-  const startDay = currentDateNumber + 1
+  const startDay = currentDateNumber
 
   return (
     <div>

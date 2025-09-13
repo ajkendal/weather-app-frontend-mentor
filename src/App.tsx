@@ -8,6 +8,7 @@ import Header from './components/Header'
 import ErrorState from './components/ErrorState'
 import Current from './components/Current'
 import Daily from './components/Daily'
+import Hourly from './components/Hourly'
 
 function App() {
   const [coordinates, setCoordinates] = useState<{
@@ -15,7 +16,7 @@ function App() {
     longitude: number
   }>({ latitude: 0, longitude: 0 })
   const [isLoading, setIsLoading] = useState(true)
-  const [searchCity, setSearchCity] = useState('')
+  const [searchCity, setSearchCity] = useState('Null Island')
   const [isError, setIsError] = useState('')
   const [isMetric, setIsMetric] = useState(false)
   const [weatherData, setWeatherData] = useState<{
@@ -48,7 +49,7 @@ function App() {
         hourly: hourlyData,
       })
     }
-    setIsLoading(false)
+    // setIsLoading(false)
   }
 
   useEffect(() => {
@@ -59,7 +60,6 @@ function App() {
           longitude: position.coords.longitude,
         })
       })
-      setSearchCity('Current Location')
     } else {
       setIsError('Geolocation is not supported by this browser.')
       console.error('Geolocation is not supported by this browser.')
@@ -68,6 +68,11 @@ function App() {
 
   useEffect(() => {
     fetchWeather()
+    if (coordinates.latitude !== 0 && coordinates.longitude !== 0) {
+      setSearchCity('Current Location')
+    } else {
+      setSearchCity('Null Island')
+    }
     console.log('weather data updated', weatherData)
   }, [isMetric, coordinates])
 
@@ -97,7 +102,13 @@ function App() {
                 isLoading={isLoading}
               />
             </div>
-            <div className='hourly-section'></div>
+            <div className='hourly-section'>
+              <Hourly
+                hourlyData={weatherData.hourly}
+                isLoading={isLoading}
+                currentDateNumber={currentDateNumber}
+              />
+            </div>
           </div>
         </>
       )}
