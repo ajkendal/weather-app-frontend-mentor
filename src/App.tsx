@@ -8,6 +8,7 @@ import Header from './components/Header'
 import ErrorState from './components/ErrorState'
 import Current from './components/Current'
 import Daily from './components/Daily'
+import Hourly from './components/Hourly'
 
 function App() {
   const [coordinates, setCoordinates] = useState<{
@@ -15,7 +16,7 @@ function App() {
     longitude: number
   }>({ latitude: 0, longitude: 0 })
   const [isLoading, setIsLoading] = useState(true)
-  const [searchCity, setSearchCity] = useState('')
+  const [searchCity, setSearchCity] = useState('Null Island')
   const [isError, setIsError] = useState('')
   const [isMetric, setIsMetric] = useState(false)
   const [weatherData, setWeatherData] = useState<{
@@ -23,6 +24,9 @@ function App() {
     daily?: any
     hourly?: any
   }>({})
+  const currentDateNumber = weatherData.current
+    ? weatherData.current.time.getDay()
+    : 0
 
   const fetchWeather = async () => {
     setIsLoading(true)
@@ -37,7 +41,7 @@ function App() {
       setIsError('Error fetching weather data.')
       setWeatherData({})
     } else {
-      const hourlyData = formatHourly(data.hourly)
+      const hourlyData = formatHourly(data.hourly, data.current.time)
       const dailyData = formatDaily(data.daily)
       setWeatherData({
         current: data.current,
@@ -55,8 +59,8 @@ function App() {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         })
+        setSearchCity('Current Location')
       })
-      setSearchCity('Current Location')
     } else {
       setIsError('Geolocation is not supported by this browser.')
       console.error('Geolocation is not supported by this browser.')
@@ -65,7 +69,9 @@ function App() {
 
   useEffect(() => {
     fetchWeather()
-    console.log('weather data updated', weatherData)
+    if (coordinates.latitude === 0 && coordinates.longitude === 0) {
+      setSearchCity('Null Island')
+    }
   }, [isMetric, coordinates])
 
   return (
@@ -80,7 +86,7 @@ function App() {
             setCoordinates={setCoordinates}
             setSearchCity={setSearchCity}
           />
-          <div className='flex-container current-daily-hourly'>
+          <div className='flex-container'>
             <div className='current-daily-section'>
               <Current
                 searchCity={searchCity}
@@ -89,14 +95,18 @@ function App() {
                 isMetric={isMetric}
               />
               <Daily
-                currentDate={
-                  weatherData.current ? weatherData.current.time.getDay() : 0
-                }
+                currentDateNumber={currentDateNumber}
                 dailyData={weatherData.daily}
                 isLoading={isLoading}
               />
             </div>
-            <div className='hourly-section'></div>
+            <div className='hourly-section'>
+              <Hourly
+                hourlyData={weatherData.hourly}
+                isLoading={isLoading}
+                currentDateNumber={currentDateNumber}
+              />
+            </div>
           </div>
         </>
       )}

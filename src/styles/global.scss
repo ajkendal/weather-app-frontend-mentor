@@ -230,7 +230,7 @@ textarea:not([rows]) {
 /* ----------------------------- */
 
 .container {
-  max-width: 80rem;
+  max-width: 84.375rem;
   width: 100%;
   margin-inline: auto;
   padding-inline: 1rem;
@@ -247,7 +247,7 @@ textarea:not([rows]) {
 
 .flex-container {
   display: flex;
-  gap: 1rem;
+  gap: 3rem;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
@@ -258,13 +258,6 @@ textarea:not([rows]) {
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 2.5rem;
-  }
-}
-
-.current-daily-hourly {
-  gap: 3rem;
-  @media (min-width: 55em) {
     gap: 2rem;
   }
 }
@@ -280,10 +273,11 @@ textarea:not([rows]) {
 }
 
 .hourly-section {
-  outline: 2px solid green;
   width: 100%;
+  align-self: stretch;
+  max-height: 900px;
   @media (min-width: 55em) {
-    flex-shrink: 3;
+    flex-shrink: 2.25;
   }
 }
 
@@ -370,6 +364,9 @@ textarea:not([rows]) {
   background-size: 1.125rem;
   background-repeat: no-repeat;
   background-position: right 1.5rem center;
+  &.open {
+    background-image: url('/images/icons/icon-dropdown-flipped.svg');
+  }
 }
 
 .units-button {
@@ -421,6 +418,8 @@ textarea:not([rows]) {
   justify-content: space-between;
   padding: 0.625rem 0.5rem;
   border-radius: 8px;
+  background: transparent;
+  border: none;
 
   &.active {
     background-color: hsl(var(--clr-neutral-700));

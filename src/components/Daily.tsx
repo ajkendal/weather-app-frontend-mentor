@@ -2,7 +2,7 @@ import styles from '../styles/Daily.module.scss'
 import { getWeatherIcon } from '../utils/getWeatherIcons'
 
 interface DailyProps {
-  currentDate: number
+  currentDateNumber: number
   dailyData: Array<{
     time: Date
     temperature_2m_max: number
@@ -12,9 +12,9 @@ interface DailyProps {
   isLoading: boolean
 }
 
-const Daily = ({ currentDate, dailyData, isLoading }: DailyProps) => {
+const Daily = ({ currentDateNumber, dailyData, isLoading }: DailyProps) => {
   const blank = 7
-  const startDay = currentDate + 1
+  const startDay = currentDateNumber
 
   return (
     <div>

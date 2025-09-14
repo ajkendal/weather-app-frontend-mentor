@@ -70,13 +70,20 @@ const Header = ({ isMetric, setIsMetric, isError }: HeaderProps) => {
         <button
           className={`units-button ${showDropdown ? 'open' : ''}`}
           aria-label='Toggle Metric/Imperial'
+          aria-haspopup='menu'
+          aria-expanded={showDropdown}
+          aria-controls='units-menu'
           onClick={() => {
             setShowDropdown(!showDropdown)
           }}
         >
           Units
         </button>
-        {showDropdown && dropdDown()}
+        {showDropdown && (
+          <div id='units-menu' role='menu'>
+            {dropdDown()}
+          </div>
+        )}
       </nav>
       {!isError && (
         <h1 className='text-preset-2'>How's the sky looking today?</h1>

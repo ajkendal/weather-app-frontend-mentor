@@ -9,25 +9,25 @@ const currentWeatherIcons = {
   thunderstorm: '/images/icons/icon-storm.webp',
 }
 
-const getWeatherIcon = (condition: number): string => {
-  switch (condition > -1) {
-    case condition === 0:
+const getWeatherIcon = (code: number): string => {
+  switch (true) {
+    case code === 0:
       return currentWeatherIcons.clear
-    case condition >= 1 && condition <= 3:
+    case code >= 1 && code <= 3:
       return currentWeatherIcons.partlyCloudy
-    case condition === 45 || condition === 48:
+    case code === 45 || code === 48:
       return currentWeatherIcons.fog
-    case condition >= 51 && condition <= 57:
+    case code >= 51 && code <= 57:
       return currentWeatherIcons.drizzle
-    case condition >= 61 && condition <= 67:
+    case code >= 61 && code <= 67:
       return currentWeatherIcons.rain
-    case condition >= 71 && condition <= 77:
+    case code >= 71 && code <= 77:
       return currentWeatherIcons.snow
-    case condition >= 80 && condition <= 82:
+    case code >= 80 && code <= 82:
       return currentWeatherIcons.rain
-    case condition >= 85 && condition <= 86:
+    case code >= 85 && code <= 86:
       return currentWeatherIcons.snow
-    case condition >= 95 && condition <= 99:
+    case code >= 95 && code <= 99:
       return currentWeatherIcons.thunderstorm
     default:
       return currentWeatherIcons.clear

@@ -34,15 +34,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![App Screenshot](./public/images/screenshot/Screenshot%202025-09-13%20at%209.31.35 PM.png)
 
 ### Links
 
@@ -85,29 +77,76 @@ flowchart TD
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+Here are a couple of code snippets from this project that I'm proud of, with a short explanation of why they matter.
 
-To see how you can add code snippets, see below:
+1. Robust Open‑Meteo shaping with correct timezone handling (apply offset once):
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
+```ts
+// src/utils/getWeather.tsx (excerpt)
+const responses = await fetchWeatherApi(url, params)
+const response = responses[0]
+const current = response.current()!
+const hourly = response.hourly()!
+const daily = response.daily()!
 
-```css
-.proud-of-this-css {
-  color: papayawhip;
+// Apply the local offset once when building time arrays
+const utcOffsetSeconds = new Date().getTimezoneOffset() * 60
+
+const weatherData = {
+  hourly: {
+    time: Array.from(
+      {
+        length:
+          (Number(hourly.timeEnd()) - Number(hourly.time())) /
+          hourly.interval(),
+      },
+      (_, i) =>
+        new Date(
+          (Number(hourly.time()) + utcOffsetSeconds + i * hourly.interval()) *
+            1000
+        )
+    ),
+    temperature_2m: hourly.variables(0)!.valuesArray(),
+    weather_code: hourly.variables(1)!.valuesArray(),
+  },
+  // ...daily/current omitted for brevity
 }
 ```
 
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
+Why: It avoids the classic “one-day-off” bug by not re‑applying the offset per interval and builds precise Date objects for rendering.
+
+2. Smooth vertical drag‑to‑scroll for the hourly list:
+
+```tsx
+// src/components/Hourly.tsx (excerpt)
+const scrollRef = useRef<HTMLDivElement>(null)
+const isDown = useRef(false)
+const startY = useRef(0)
+const scrollTop = useRef(0)
+
+const handleMouseDown = (e: React.MouseEvent) => {
+  isDown.current = true
+  startY.current =
+    e.pageY - (scrollRef.current?.getBoundingClientRect().top || 0)
+  scrollTop.current = scrollRef.current?.scrollTop || 0
+  document.body.style.userSelect = 'none'
+}
+
+const handleMouseMove = (e: React.MouseEvent) => {
+  if (!isDown.current) return
+  e.preventDefault()
+  const y = e.pageY - (scrollRef.current?.getBoundingClientRect().top || 0)
+  const walk = y - startY.current
+  if (scrollRef.current) scrollRef.current.scrollTop = scrollTop.current - walk
+}
+
+const handleMouseUp = () => {
+  isDown.current = false
+  document.body.style.userSelect = ''
 }
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+Why: It keeps the UI compact on small screens while offering a natural “grab to scroll” interaction without extra libraries.
 
 ### Stretch Goals
 
