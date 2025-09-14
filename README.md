@@ -165,4 +165,4 @@ Why: It keeps the UI compact on small screens while offering a natural “grab t
 - Website - [Amanda J Kendal-Brown](https://ajkendal.github.io/)
 - LinkedIn - [@akendalb](https://www.linkedin.com/in/akendalb)
 - GitHub - [@ajkendal](https://github.com/ajkendal/)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/ajkendal)
+- Frontend Mentor - [@ajkendal](https://www.frontendmentor.io/profile/ajkendal)
