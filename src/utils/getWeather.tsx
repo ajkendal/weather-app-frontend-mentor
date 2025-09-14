@@ -37,14 +37,12 @@ const getWeather = async (
     const hourly = response.hourly()!
     const daily = response.daily()!
 
-    const utcOffsetSeconds = new Date().getTimezoneOffset() * 60
-    const currentUtcOffsetSeconds = response.utcOffsetSeconds()
+    // Use the API-provided timezone offset for the searched location
+    const tzOffsetSeconds = response.utcOffsetSeconds()
 
     const weatherData = {
       current: {
-        time: new Date(
-          (Number(current.time()) + currentUtcOffsetSeconds) * 1000
-        ),
+        time: new Date((Number(current.time()) + tzOffsetSeconds) * 1000),
         temperature_2m: current.variables(0)!.value(),
         relative_humidity_2m: current.variables(1)!.value(),
         apparent_temperature: current.variables(2)!.value(),
@@ -62,7 +60,7 @@ const getWeather = async (
           (_, i) =>
             new Date(
               (Number(hourly.time()) +
-                utcOffsetSeconds +
+                tzOffsetSeconds +
                 i * hourly.interval()) *
                 1000
             )
@@ -79,7 +77,7 @@ const getWeather = async (
           },
           (_, i) =>
             new Date(
-              (Number(daily.time()) + utcOffsetSeconds + i * daily.interval()) *
+              (Number(daily.time()) + tzOffsetSeconds + i * daily.interval()) *
                 1000
             )
         ),

@@ -55,7 +55,7 @@ const Current = ({
           </div>
           <div className={styles['current-icon']}>
             <img
-              src={getWeatherIcon(currentData.weathercode)}
+              src={getWeatherIcon(currentData.weather_code)}
               alt='Weather Icon'
             />
             <p className='text-preset-1'>

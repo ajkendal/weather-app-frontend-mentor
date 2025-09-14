@@ -15,9 +15,11 @@
   justify-content: space-between;
   align-items: center;
   padding-right: 1.25rem;
+  position: relative;
 }
 
 .hourly-button {
+  position: relative;
   background-color: hsl(var(--clr-neutral-600)) !important;
   &:hover {
     background-color: hsl(var(--clr-neutral-700)) !important;
@@ -27,6 +29,21 @@
     &:hover {
       background-color: hsl(var(--clr-neutral-600)) !important;
     }
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  margin-top: 1rem;
+  margin-right: 1.25rem;
+  top: 100%;
+  right: 0;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+
+  button:hover {
+    background-color: hsl(var(--clr-neutral-600));
   }
 }
 
@@ -59,4 +76,18 @@
   direction: row;
   align-items: center;
   justify-content: space-between;
+
+  .icon-time {
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
 }

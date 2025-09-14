@@ -41,7 +41,7 @@ function App() {
       setIsError('Error fetching weather data.')
       setWeatherData({})
     } else {
-      const hourlyData = formatHourly(data.hourly)
+      const hourlyData = formatHourly(data.hourly, data.current.time)
       const dailyData = formatDaily(data.daily)
       setWeatherData({
         current: data.current,
@@ -49,7 +49,7 @@ function App() {
         hourly: hourlyData,
       })
     }
-    // setIsLoading(false)
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -59,6 +59,7 @@ function App() {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         })
+        setSearchCity('Current Location')
       })
     } else {
       setIsError('Geolocation is not supported by this browser.')
@@ -68,12 +69,9 @@ function App() {
 
   useEffect(() => {
     fetchWeather()
-    if (coordinates.latitude !== 0 && coordinates.longitude !== 0) {
-      setSearchCity('Current Location')
-    } else {
+    if (coordinates.latitude === 0 && coordinates.longitude === 0) {
       setSearchCity('Null Island')
     }
-    console.log('weather data updated', weatherData)
   }, [isMetric, coordinates])
 
   return (

@@ -364,6 +364,9 @@ textarea:not([rows]) {
   background-size: 1.125rem;
   background-repeat: no-repeat;
   background-position: right 1.5rem center;
+  &.open {
+    background-image: url('/images/icons/icon-dropdown-flipped.svg');
+  }
 }
 
 .units-button {
@@ -415,6 +418,8 @@ textarea:not([rows]) {
   justify-content: space-between;
   padding: 0.625rem 0.5rem;
   border-radius: 8px;
+  background: transparent;
+  border: none;
 
   &.active {
     background-color: hsl(var(--clr-neutral-700));
